@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
         JumpPlayer();
+
+        if (transform.position.y < -10)
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
     }
 
     void Movement()
@@ -68,6 +74,10 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("Ground"))
         {
             Maxjump = 0;
+        }
+        if(collision.gameObject.CompareTag("Diamond"))
+        {
+            SceneManager.LoadScene("WinScene");
         }
     }
 }
